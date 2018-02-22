@@ -5,8 +5,6 @@ import * as controller from './course.controller';
 
 const router = new Router();
 
-console.log("controller-=====", controller);
-
 router.get('/', controller.index);
 router.post('/', controller.create);
 router.get('/:id', controller.show);

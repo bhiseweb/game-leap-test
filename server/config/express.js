@@ -10,7 +10,6 @@ import path from "path";
 
 export const app = express();
 
-console.log(__dirname);
 export default function(config) {
   
   app.use(morgan("dev"));
