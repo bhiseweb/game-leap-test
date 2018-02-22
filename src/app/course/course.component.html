@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div *ngIf="!id">
+        <div>
+          <a [routerLink]="['/courses/new']">New Course</a>
+        </div>
+        <div *ngFor="let course of courses" class="card">
+          <div class="card-body">
+            <div>Name: <a [routerLink]="['/courses/' + course._id]">{{course.name}}</a></div>
+            <div>Duration: {{ duration(course) }}</div>
+            <div>
+              <a [routerLink]="['/courses/' + course._id + '/edit' ]">Edit</a> | 
+              <a href="javascript:void(0)" (click)="destroyCourse(course._id)">Destroy</a> | 
+              <a [routerLink]="['/courses/' + course._id + '/video-guides/new']">New Video Guide</a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="courses.length === 0">No Course Found</div>
+      </div>
+      <div *ngIf="id">
+        <div>
+          <a [routerLink]="['/courses/' + id + '/video-guides/new']">New Video Guide</a>
+        </div>
+        <h3 *ngIf="videoGuides[0]">Video Guides for {{videoGuides[0].course.name}}</h3>
+        <table class="table">
+          <th>Title</th>
+          <th>Url</th>
+          <th>Duration</th>
+          <th></th>
+          <tr *ngFor="let vguide of videoGuides">
+            <td>{{vguide.title}}</td>
+            <td>{{vguide.videoUrl}}</td>
+            <td>{{vguide.duration}}</td>
+            <td><a [routerLink]="['/courses/' + vguide.course._id + '/video-guides/' + vguide._id + '/edit' ]">Edit</a> | <a href="javascript:void(0)" (click)="destroyVideoGuide(vguide.course._id, vguide._id)">Destroy</a></td>
+          </tr>
+        </table>
+        <div *ngIf="videoGuides.length === 0">No Video Guide Found</div>
+      </div>
+    </div>
+  </div>
+</div>
